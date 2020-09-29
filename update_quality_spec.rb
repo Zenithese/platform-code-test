@@ -1,5 +1,5 @@
 require 'rspec'
-require 'update_quality'
+require 'award'
 
 describe '#update_quality' do
 
