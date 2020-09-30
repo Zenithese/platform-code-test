@@ -9,13 +9,11 @@ end
 NORMALITEM = Struct.new(:name, :expires_in, :quality) do
 
     def limit
-        self.quality > 50 ? 50 : self.quality <= 0 ? 0 : self.quality 
+        self.quality > 50 ? self.quality = 50 : self.quality <= 0 ? self.quality = 0 : self.quality 
     end
 
     def appreciate
         self.expires_in > 0 ? self.quality -= 1 : self.quality -= 2
-        
-        self.quality = self.limit
     end
 
     def age
@@ -28,21 +26,19 @@ class BlueFirst < NORMALITEM
     # increase in quality the older they get
     def appreciate
         self.expires_in > 0 ? self.quality += 1 : self.quality += 2
-
-        self.quality = self.limit
     end
 
 end
 
 class BlueDistinctionPlus < NORMALITEM
     # never decreases in quality / being highly sought, its quality is 80 and it never alters.
+    def limit; nil end
+
     def appreciate
         self.quality = 80
     end
 
-    def age
-        nil
-    end
+    def age; nil end
 
 end
 
@@ -58,8 +54,6 @@ class BlueCompare < NORMALITEM
         else
             self.quality += 1 
         end
-
-        self.quality = self.limit
     end
 
 end
@@ -68,8 +62,6 @@ class BlueStar < NORMALITEM
     # lose quality value twice as fast as normal awards
     def appreciate
         self.expires_in > 0 ? self.quality -= 2 : self.quality -= 4
-
-        self.quality = self.limit
     end
 
 end
