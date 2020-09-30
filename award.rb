@@ -1,7 +1,11 @@
 Award = Struct.new(:name, :expires_in, :quality) do
 
-    def limit
-        self.quality > 50 ? 50 : self.quality < 0 ? 0 : self.quality 
+    # def limit
+    #     self.quality > 50 ? 50 : self.quality < 0 ? 0 : self.quality 
+    # end
+
+    def appreciate
+        self.quality -= 1
     end
 
     def age
