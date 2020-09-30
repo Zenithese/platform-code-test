@@ -13,9 +13,9 @@ NORMALITEM = Struct.new(:name, :expires_in, :quality) do
     end
 
     def appreciate
-        return 0 if self.quality <= 0
-        
         self.expires_in > 0 ? self.quality -= 1 : self.quality -= 2
+        
+        self.quality = self.limit
     end
 
     def age
